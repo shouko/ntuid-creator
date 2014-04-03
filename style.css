@@ -21,12 +21,12 @@
 @font-face {
 	/* 我覺得這個還滿像學生證標題的字體 */
     font-family: 'DFWeiBei-B5';
-    src: url('../HuaKangWeiBei.ttf');
+    src: url('./HuaKangWeiBei.ttf');
 }
 @font-face {
 	/* 我覺得這個還滿像學生證後面浮水印的字體 */
     font-family: 'DFPGuYinMedium-B5';
-    src: url('../HuaKangOldStamp.ttf');
+    src: url('./HuaKangOldStamp.ttf');
 }
 @font-face {
 	/* 使用 code 39 的字體產生條碼的部分 */
