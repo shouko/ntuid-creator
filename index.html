@@ -1,9 +1,5 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-	<title>My NTU ID Creator</title>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" href="style.css">
 	<!--
 
 	NTU ID Creator by h999342@gmail.com
@@ -17,6 +13,13 @@
 	TAs: Chien-Husn Tseng and Jero Yu
 	Student: b02705020 虞翔皓
 	-->
+<head>
+	<title>My NTU ID Creator</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 	<script type="text/javascript">
 	var status_base=new Array(10);
 	status_base[0]="新發";
@@ -29,18 +32,15 @@
 	status_base[7]="補發 7";
 	status_base[8]="補發 8";
 	status_base[9]="補發 9";
-	function $(elementid){
-		return document.getElementById(elementid);
-	}
 	function create(){
-		$("result-dept").innerHTML = $("input-dept").value;
-		$("result-id").innerHTML = $("input-id").value;
-//		$("result-id-barcode").innerHTML = "*"+$("input-id").value+$("input-id-status").value.toUpperCase()+"*";
-		$("result-id-status").innerHTML = status_base[$("input-id-status").value];
-		$("result-name").innerHTML = $("input-name").value;
-		$("result-birthday").innerHTML = $("input-birthday-year").value+"年"+$("input-birthday-month").value+"月"+$("input-birthday-day").value+"日";
-		$("owner-photo").src = $("input-photourl").value;
-		$("id-outline").style.visibility="visible";
+		$("#result-dept").html($("#input-dept").val());
+		$("#result-id").html($("#input-id").val());
+//		$("result-id-barcode").html("*"+$("input-id").val()+$("input-id-status").val().toUpperCase()+"*";
+		$("#result-id-status").html(status_base[$("#input-id-status").val()]);
+		$("#result-name").html($("#input-name").val());
+		$("#result-birthday").html($("#input-birthday-year").val()+"年"+$("#input-birthday-month").val()+"月"+$("#input-birthday-day").val()+"日");
+		$("#owner-photo").src = $("#input-photourl").val();
+		$("#id-outline").css('visibility', "visible");
 	}
 	</script>
 </head>
