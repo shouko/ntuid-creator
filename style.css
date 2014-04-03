@@ -1,0 +1,165 @@
+/*
+
+	NTU ID Creator by h999342@gmail.com
+	Originated From the Following Project
+
+	Introduction to Computers, Lab
+	Fall 2013, Dept. of Information Management, National Taiwan University
+
+	Week 6 Assignment
+
+	TAs: Chien-Husn Tseng and Jero Yu
+	Student: b02705020 虞翔皓
+
+	其實以前一直不太碰css
+	上完這次的課覺得這真是一個神奇的東西啊啊啊啊啊啊
+*/
+
+	/* 以前有看過引用字體檔案的寫法，感覺好酷，這次終於有機會用上了xD
+	   雖然感覺有點浪費頻寬 = =
+	 */
+@font-face {
+	/* 我覺得這個還滿像學生證標題的字體 */
+    font-family: 'DFWeiBei-B5';
+    src: url('../HuaKangWeiBei.ttf');
+}
+@font-face {
+	/* 我覺得這個還滿像學生證後面浮水印的字體 */
+    font-family: 'DFPGuYinMedium-B5';
+    src: url('../HuaKangOldStamp.ttf');
+}
+@font-face {
+	/* 使用 code 39 的字體產生條碼的部分 */
+	font-family: 'Code 39';
+	src: url('code-39.ttf');
+}
+
+div {
+	margin: 0px auto;
+}
+
+.creator-form {
+	width: 430px;
+	font-family: Arial;
+	position: relative;
+}
+
+.creator-form h1 {
+	color: brown;
+	text-align: center;
+}
+
+.go-button {
+	position: absolute;
+	right: 10%;
+	bottom: 30%;
+	font-size: 30px;
+	color: blue;
+}
+
+#id-outline {
+	border-radius: 10px;
+	background-color: Moccasin;
+	/* 悠游卡學生證大小約為 8.6cm * 5.4 cm
+	   為維持相對比例取 430px * 270px
+	*/
+	width: 430px;
+	height: 270px;
+	position: relative;
+	/* 學生證底圖有浮水印的禮記選文，所以底色要到更低的z-index去不然會擋到 */
+	z-index: -2;
+	/* 加個陰影還頗漂亮的xD */
+	box-shadow: 1px 1px 5px gray;
+}
+
+.back-watermark {
+	/* 自己測試的時候 Chrome總是跑不出來 (可能華康古印體太肥了)
+	   為了怕版面跑去其他字體，第二順位選用幾乎所有電腦都會有的Arial 
+	*/
+	font-family: DFPGuYinMedium-B5, Arial;
+	text-align: justify;
+	position: absolute;
+	right: 0px;
+	font-size: 29px;
+	padding-top: 3px;
+	line-height: 1.14em;
+	letter-spacing: 9px;
+	z-index: -1;
+	color: LightYellow;
+	/* 決定文字方向 上到下 右到左
+	   參考資料: http://www.ideographer.com/articles/article.php?aid=82
+	*/
+	/* for old IE */
+	writing-mode: tb-rl;
+	/* for CSS3 */
+	-webkit-writing-mode: vertical-rl;
+}
+
+.big-title {
+	font-family: DFWeiBei-B5, Arial;
+}
+
+/* 啊啊啊 感覺都在湊數字噗噗 */
+
+.big-title h2 {
+	font-size: 35px;
+	padding-top: 20px;
+	padding-left: 25px;
+	line-height: 0.7em;
+	color: Brown;
+}
+
+.english-title {
+	font-size: 17px;
+	line-height: 1.7em;
+	letter-spacing: -1px;
+	padding-left: 83px;
+}
+
+.big-title span {
+	font-size: 0.7em;
+	border-left: 0px;
+}
+
+.ntu-logo {
+	float: left;
+	height: 70px;
+	padding-right: 7px;
+	margin-top: -10px;
+}
+
+#owner-photo{
+	width: 110px;
+	float: right;
+	margin-right: 25px;
+	margin-top: -30px;
+}
+
+.owner-info {
+	/* 不要讓 li 前面的 bullet point 出現 */
+	list-style-type: none;
+	margin-top: -10px;
+	/* Mac 下的標楷體叫做 BiauKai */
+	font-family: “標楷體”, DFKai-sb, BiauKai;
+	font-size: 1.07em;
+	line-height: 1.22em;
+}
+
+#result-id-barcode {
+	width: 250px;
+	height: 40px;
+	background-color: white;
+	/* padding-left: 10px; */
+	font-family: 'Code 39';
+	font-size: 30px;
+	letter-spacing: 3px;
+	line-height: 40px;
+	float: left;
+	margin-left: 25px;
+	margin-top: -10px;
+}
+
+#footer {
+	margin-top: 30px;
+	text-align: center;
+}

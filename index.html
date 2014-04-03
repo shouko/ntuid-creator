@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>My NTU ID Creator</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="style.css">
+	<!--
+
+	NTU ID Creator by h999342@gmail.com
+	Originated From the Following Project
+
+	Introduction to Computers, Lab
+	Fall 2013, Dept. of Information Management, National Taiwan University
+
+	Week 6 Assignment
+
+	TAs: Chien-Husn Tseng and Jero Yu
+	Student: b02705020 虞翔皓
+	-->
+	<script type="text/javascript">
+	var status_base=new Array(10);
+	status_base[0]="新發";
+	status_base[1]="補發 1";
+	status_base[2]="補發 2";
+	status_base[3]="補發 3";
+	status_base[4]="補發 4";
+	status_base[5]="補發 5";
+	status_base[6]="補發 6";
+	status_base[7]="補發 7";
+	status_base[8]="補發 8";
+	status_base[9]="補發 9";
+	function $(elementid){
+		return document.getElementById(elementid);
+	}
+	function create(){
+		$("result-dept").innerHTML = $("input-dept").value;
+		$("result-id").innerHTML = $("input-id").value;
+//		$("result-id-barcode").innerHTML = "*"+$("input-id").value+$("input-id-status").value.toUpperCase()+"*";
+		$("result-id-status").innerHTML = status_base[$("input-id-status").value];
+		$("result-name").innerHTML = $("input-name").value;
+		$("result-birthday").innerHTML = $("input-birthday-year").value+"年"+$("input-birthday-month").value+"月"+$("input-birthday-day").value+"日";
+		$("owner-photo").src = $("input-photourl").value;
+		$("id-outline").style.visibility="visible";
+	}
+	</script>
+</head>
+<body>
+	<div class="creator-form">
+		<h1>My NTU ID Creator</h1>
+		<h4>歡迎使用趣味台大學生證產生器！請輸入以下欄位並按下Create即可產生。本工具僅供紀念使用，並無任何效力，任意使用本人恕不負責噢！</h4>
+		系所：<input id="input-dept"><br>
+		學號：<input id="input-id"><br>
+		狀態：<select id="input-id-status">
+				<option value="0" selected>新發</option>
+				<option value="1">補發 1</option>
+				<option value="2">補發 2</option>
+				<option value="3">補發 3</option>
+				<option value="4">補發 4</option>
+				<option value="5">補發 5</option>
+				<option value="6">補發 6</option>
+				<option value="7">補發 7</option>
+				<option value="8">補發 8</option>
+				<option value="9">補發 9</option>
+			</select><br>
+		姓名：<input id="input-name"><br>
+		生日：民國
+		<input id="input-birthday-year" size="3" maxlength="3">年
+		<input id="input-birthday-month" size="2" maxlength="2">月
+		<input id="input-birthday-day" size="2" maxlength="2">日<br>
+		照片網址：<input id="input-photourl" size="60">
+		<button onclick="create()" class="go-button">Create</button><br>
+	</div>
+	<div id="id-outline" style="visibility: hidden;">
+		<div class="back-watermark">
+		<!-- 原來學生證底圖那個是 禮記學記 選的文耶 xD -->
+			大學之教也時教<br>
+			必有正業退息必<br>
+			有居學不學操縵<br>
+			不能安弦不學博<br>
+			依不能安詩不學<br>
+			雜服不能安禮不<br>
+			興其藝不能樂學<br>
+			故君子之於學也<br>
+			藏焉修焉息焉遊<br>
+			焉夫然故安其學<br>
+			而親其師樂其友<br>
+			而信其道是以雖<br>
+			離師輔而不反也</div>
+
+		<div class="big-title">
+			<h2><img src="week6-ntu-logo.png" class="ntu-logo">
+			國立臺灣大學<span>學生證</span><div class="english-title">National Taiwan University</div></h2>
+		</div>
+		<img src="default_female.jpg" id="owner-photo">
+		<ul class="owner-info">
+			<li>系所：<span id="result-dept"></span></li><br>
+			<li>學號：<span id="result-id"></span> <span id="result-id-status"></span></li>
+			<li>姓名：<span id="result-name"></span></li>
+			<li>生日：民國<span id="result-birthday"></span></li>
+		</ul>
+		<div id="result-id-barcode"><img src="barcode-default.png" height="40"></div>
+	</div>
+	<div id="footer">&copy; 2013. Authored by Hsiang-Hao Yu, National Taiwan University.</div>
+</body>
+</html>
