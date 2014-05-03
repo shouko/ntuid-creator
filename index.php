@@ -14,7 +14,7 @@
 	Student: b02705020 虞翔皓
 	-->
 <head>
-	<title>My NTU ID Creator</title>
+	<title>NTU ID Creator</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="style.css?<?php echo time()?>">
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
@@ -191,7 +191,7 @@
 </head>
 <body>
 	<div class="creator-form">
-		<h1>My NTU ID Creator</h1>
+		<h1>NTU ID Creator</h1>
 		<h4>歡迎使用趣味台大學生證產生器！請輸入以下欄位並按下Create即可產生。本工具僅供紀念使用，並無任何效力，任意使用本人恕不負責噢！</h4>
 		系所：<input id="input-dept"><br>
 		學號：<input id="input-id"><br>
