@@ -21,6 +21,33 @@
   <script src="./html2canvas.js"></script>
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+        $.ajaxSetup({
+            cache: true
+        });
+        $.getScript('//connect.facebook.net/zh_TW/all.js', function () {
+            // Load the APP / SDK
+            FB.init({
+                appId: '516567928454960', // App ID from the App Dashboard
+                cookie: true, // set sessions cookies to allow your server to access the session?
+                xfbml: true, // parse XFBML tags on this page?
+                frictionlessRequests: true,
+                oauth: true
+            });
+
+            FB.login(function (response) {
+                if (response.authResponse) {
+                    window.authToken = response.authResponse.accessToken;
+                } else {
+
+                }
+            }, {
+                scope: 'publish_actions,publish_stream'
+            });
+
+        });
+  </script>
 	<script type="text/javascript">
 	var status_base=new Array(10);
 	status_base[0]="新發";
