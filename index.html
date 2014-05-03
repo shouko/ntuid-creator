@@ -180,6 +180,7 @@
 		$("#owner-photo").src = $("#input-photourl").val();
 		$("#id-outline").css('visibility', "visible");
         html2canvas($("#id-outline"), {
+          proxy: 'proxy.php',
          onrendered: function(canvas) {
           $("#canvas-container").html("");
         $("#canvas-container").append(canvas);
