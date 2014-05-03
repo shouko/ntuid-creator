@@ -23,11 +23,23 @@
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
   <script type="text/javascript">
-  var imgToPost = "";
-  var authToken = "";
+
+function postToWall() {  
+    FB.login(function(response) {
+      if (response.authResponse) {
+          doPostToWall(response.authResponse.accessToken);
+      } else {
+        alert('請記得允許發佈的權限喔><');
+      }
+    }, {scope: 'publish_stream'});
+    return false;
+}
+
+
+
 
 // Post a BASE64 Encoded PNG Image to facebook
-function PostImageToFacebook(authToken) {
+function doPostToWall(authToken) {
 var imageData = imgToPost;
 try {
     blob = dataURItoBlob(imageData);
@@ -85,7 +97,6 @@ return new Blob([ab], {
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
-      authToken = response.authResponse.accessToken;
       formInit();
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
@@ -106,6 +117,7 @@ function formInit() {
       $("#fblogin").css('display',"none");
       $("#data-form").css('display',"");
       $("#input-name").val(response.name);
+      $("#owner-photo").attr('src', 'fbimg.php?u='+response.id);
     });
   }
 
@@ -175,14 +187,14 @@ function formInit() {
 	<div class="creator-form">
 		<h1>NTU ID Creator</h1>
 		<h4>歡迎使用趣味台大學生證產生器！登入FB後請輸入以下欄位並按下Create即可產生。本工具僅供紀念使用，並無任何效力，任意使用本人恕不負責噢！</h4>
-    <div id="fblogin"><fb:login-button data-size="xlarge" scope="public_profile,publish_actions,publish_stream" onlogin="checkLoginState();">
+    <div id="fblogin"><fb:login-button data-size="xlarge" scope="public_profile" onlogin="checkLoginState();">
 </fb:login-button>  <div id="status">
 </div>
 </div>
 
 <div id="data-form" style="display:none">
-		系所：<input id="input-dept"><br>
-		學號：<input id="input-id"><br>
+		系所：<input id="input-dept" value="資訊管理學系"><br>
+		學號：<input id="input-id" value="B00000000"><br>
 		狀態：<select id="input-id-status">
 				<option value="0" selected>新發</option>
 				<option value="1">補發 1</option>
@@ -197,9 +209,9 @@ function formInit() {
 			</select><br>
 		姓名：<input id="input-name"><br>
 		生日：民國
-		<input id="input-birthday-year" size="3" maxlength="3">年
-		<input id="input-birthday-month" size="2" maxlength="2">月
-		<input id="input-birthday-day" size="2" maxlength="2">日<br>
+		<input id="input-birthday-year" size="3" maxlength="3" value="17">年
+		<input id="input-birthday-month" size="2" maxlength="2" value="3">月
+		<input id="input-birthday-day" size="2" maxlength="2" value="17">日<br>
 
 		<button onclick="create()" class="go-button">Create</button>
 </div>
@@ -208,7 +220,7 @@ function formInit() {
    <div id="canvas-container"></div>
 
    <div id="post2fb" style="display:none">
-     <button onclick="PostImageToFacebook(window.authToken)" class="post-button">分享到FB</button>
+     <button onclick="postToWall()" class="post-button">分享到FB</button>
    </div>
 	<div id="id-outline" style="visibility: hidden;">
 
