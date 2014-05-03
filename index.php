@@ -248,6 +248,6 @@
 		</ul>
 		<div id="result-id-barcode"><img src="barcode-default.png" height="40"></div>
 	</div>
-	<div id="footer">&copy; 2013. Authored by Hsiang-Hao Yu, National Taiwan University.</div>
+	<div id="footer">by Shouko, NTUIM</div>
 </body>
 </html>
