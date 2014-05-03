@@ -18,6 +18,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+  <script src="./html2canvas.js"></script>
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 	<script type="text/javascript">
@@ -178,6 +179,14 @@
 		$("#result-birthday").html($("#input-birthday-year").val()+"年"+$("#input-birthday-month").val()+"月"+$("#input-birthday-day").val()+"日");
 		$("#owner-photo").src = $("#input-photourl").val();
 		$("#id-outline").css('visibility', "visible");
+        html2canvas($("#id-outline"), {
+         onrendered: function(canvas) {
+          $("#canvas-container").html("");
+        $("#canvas-container").append(canvas);
+        console.log(canvas.toDataURL('image/png'));
+       $("#id-outline").css('visibility', "hidden");
+        }
+       });
 	}
 	</script>
 </head>
@@ -237,6 +246,8 @@
 		</ul>
 		<div id="result-id-barcode"><img src="barcode-default.png" height="40"></div>
 	</div>
+  <div id="canvas-container">
+</div>
 	<div id="footer">&copy; 2013. Authored by Hsiang-Hao Yu, National Taiwan University.</div>
 </body>
 </html>
