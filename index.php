@@ -3,7 +3,7 @@
 	<!--
 
 	NTU ID Creator by h999342@gmail.com
-	Originated From the Following Project
+	Inspired by the Following Project
 
 	Introduction to Computers, Lab
 	Fall 2013, Dept. of Information Management, National Taiwan University
