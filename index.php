@@ -31,7 +31,7 @@ function postToWall() {
       } else {
         alert('請記得允許發佈的權限喔><');
       }
-    }, {scope: 'publish_stream'});
+    }, {scope: 'publish_actions'});
     return false;
 }
 
@@ -173,9 +173,9 @@ function formInit() {
 		$("#id-outline").css('visibility', "visible");
         html2canvas($("#id-outline"), {
          onrendered: function(canvas) {
-          $("#canvas-container").html("");
-        $("#canvas-container").append(canvas);
         imgToPost = canvas.toDataURL('image/png');
+          $("#canvas-container").html('<img id="finalId" src="">');
+          $("#finalId").attr('src',imgToPost);
        $("#id-outline").css('visibility', "hidden");
        $("#post2fb").css('display',"");
         }
