@@ -174,7 +174,7 @@ function formInit() {
         html2canvas($("#id-outline"), {
          onrendered: function(canvas) {
         imgToPost = canvas.toDataURL('image/png');
-          $("#canvas-container").html('<img id="finalId" src="">');
+          $("#canvas-container").html('<img id="finalId" src=""><br><h4>發佈功能目前fb審核中，請先另存圖片再上傳 ><</h4>');
           $("#finalId").attr('src',imgToPost);
        $("#id-outline").css('visibility', "hidden");
        $("#post2fb").css('display',"");
