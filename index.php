@@ -16,7 +16,7 @@
 <head>
 	<title>My NTU ID Creator</title>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="style.css?<?php echo time()?>">
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
   <script src="./html2canvas.js"></script>
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -217,28 +217,11 @@
 		照片網址：<input id="input-photourl" size="60">
 		<button onclick="create()" class="go-button">Create</button><br>
 	</div>
-   <div id="canvas-container"></div>
-	<div id="id-outline" style="visibility: hidden;">
-		<div class="back-watermark">
-		<!-- 原來學生證底圖那個是 禮記學記 選的文耶 xD -->
-			大學之教也時教<br>
-			必有正業退息必<br>
-			有居學不學操縵<br>
-			不能安弦不學博<br>
-			依不能安詩不學<br>
-			雜服不能安禮不<br>
-			興其藝不能樂學<br>
-			故君子之於學也<br>
-			藏焉修焉息焉遊<br>
-			焉夫然故安其學<br>
-			而親其師樂其友<br>
-			而信其道是以雖<br>
-			離師輔而不反也</div>
 
-		<div class="big-title">
-			<h2><img src="week6-ntu-logo.png" class="ntu-logo">
-			國立臺灣大學<span>學生證</span><div class="english-title">National Taiwan University</div></h2>
-		</div>
+   <div id="canvas-container"></div>
+
+	<div id="id-outline" style="visibility: hidden;">
+
 		<img src="default_female.jpg" id="owner-photo">
 		<ul class="owner-info">
 			<li>系所：<span id="result-dept"></span></li><br>
@@ -246,8 +229,9 @@
 			<li>姓名：<span id="result-name"></span></li>
 			<li>生日：民國<span id="result-birthday"></span></li>
 		</ul>
-		<div id="result-id-barcode"><img src="barcode-default.png" height="40"></div>
+    <span id="watermark">Created using http://ntu.shouko.tw/id-creator</span>
 	</div>
+
 	<div id="footer">by Shouko, NTUIM</div>
 </body>
 </html>
