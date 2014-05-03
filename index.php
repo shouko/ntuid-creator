@@ -173,14 +173,12 @@
 	function create(){
 		$("#result-dept").html($("#input-dept").val());
 		$("#result-id").html($("#input-id").val());
-//		$("result-id-barcode").html("*"+$("input-id").val()+$("input-id-status").val().toUpperCase()+"*";
 		$("#result-id-status").html(status_base[$("#input-id-status").val()]);
 		$("#result-name").html($("#input-name").val());
 		$("#result-birthday").html($("#input-birthday-year").val()+"年"+$("#input-birthday-month").val()+"月"+$("#input-birthday-day").val()+"日");
 		$("#owner-photo").attr('src', $("#input-photourl").val());
 		$("#id-outline").css('visibility', "visible");
         html2canvas($("#id-outline"), {
-//          proxy: 'proxy.php',
          onrendered: function(canvas) {
           $("#canvas-container").html("");
         $("#canvas-container").append(canvas);
