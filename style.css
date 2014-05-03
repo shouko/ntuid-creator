@@ -18,6 +18,11 @@ div {
 	margin: 0px auto;
 }
 
+#fblogin {
+	margin: 0 auto;
+	text-align: center;
+}
+
 .creator-form {
 	width: 430px;
 	font-family: Arial;
@@ -32,9 +37,19 @@ div {
 .go-button {
 	position: absolute;
 	right: 10%;
-	bottom: 30%;
+	bottom: 20%;
 	font-size: 30px;
 	color: blue;
+}
+
+.post-button {
+	font-size: 30px;
+	color: blue;
+}
+
+#post2fb {
+	margin-top: 20px;
+	text-align: center;
 }
 
 #id-outline {

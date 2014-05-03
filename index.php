@@ -14,6 +14,7 @@
 	Student: b02705020 虞翔皓
 	-->
 <head>
+
 	<title>NTU ID Creator</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="style.css?<?php echo time()?>">
@@ -22,6 +23,97 @@
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
   <script type="text/javascript">
+  var imgToPost = "";
+  var authToken = "";
+
+// Post a BASE64 Encoded PNG Image to facebook
+function PostImageToFacebook(authToken) {
+var imageData = imgToPost;
+try {
+    blob = dataURItoBlob(imageData);
+} catch (e) {
+    console.log(e);
+}
+var fd = new FormData();
+fd.append("access_token", authToken);
+fd.append("source", blob);
+fd.append("message", "這是我的NTU趣味學生證喔 ^.<\n\nhttp://ntu.shouko.tw/id-creator");
+try {
+    $.ajax({
+        url: "https://graph.facebook.com/me/photos?access_token=" + authToken,
+        type: "POST",
+        data: fd,
+        processData: false,
+        contentType: false,
+        cache: false,
+        success: function (data) {
+            console.log("success " + data);
+            alert('發佈成功!');
+        },
+        error: function (shr, status, data) {
+            console.log("error " + data + " Status " + shr.status);
+        },
+        complete: function () {
+            console.log("Posted to facebook");
+        }
+    });
+
+} catch (e) {
+    console.log(e);
+}
+}
+
+// Convert a data URI to blob
+function dataURItoBlob(dataURI) {
+var byteString = atob(dataURI.split(',')[1]);
+var ab = new ArrayBuffer(byteString.length);
+var ia = new Uint8Array(ab);
+for (var i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i);
+}
+return new Blob([ab], {
+    type: 'image/png'
+});
+}
+
+ function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      authToken = response.authResponse.accessToken;
+      formInit();
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into Facebook.';
+    }
+  }
+
+function formInit() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Good to see you, ' + response.name + '.');
+      $("#fblogin").css('display',"none");
+      $("#data-form").css('display',"");
+      $("#input-name").val(response.name);
+    });
+  }
+
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
     $(document).ready(function () {
         $.ajaxSetup({
             cache: true
@@ -36,17 +128,9 @@
                 oauth: true
             });
 
-            FB.login(function (response) {
-                if (response.authResponse) {
-                    window.authToken = response.authResponse.accessToken;
-                } else {
-
-                }
-            }, {
-                scope: 'publish_actions,publish_stream'
-            });
-
         });
+      });
+
   </script>
 	<script type="text/javascript">
 	var status_base=new Array(10);
@@ -79,8 +163,9 @@
          onrendered: function(canvas) {
           $("#canvas-container").html("");
         $("#canvas-container").append(canvas);
-        console.log(canvas.toDataURL('image/png'));
+        imgToPost = canvas.toDataURL('image/png');
        $("#id-outline").css('visibility', "hidden");
+       $("#post2fb").css('display',"");
         }
        });
 	}
@@ -89,7 +174,13 @@
 <body>
 	<div class="creator-form">
 		<h1>NTU ID Creator</h1>
-		<h4>歡迎使用趣味台大學生證產生器！請輸入以下欄位並按下Create即可產生。本工具僅供紀念使用，並無任何效力，任意使用本人恕不負責噢！</h4>
+		<h4>歡迎使用趣味台大學生證產生器！登入FB後請輸入以下欄位並按下Create即可產生。本工具僅供紀念使用，並無任何效力，任意使用本人恕不負責噢！</h4>
+    <div id="fblogin"><fb:login-button data-size="xlarge" scope="public_profile,publish_actions,publish_stream" onlogin="checkLoginState();">
+</fb:login-button>  <div id="status">
+</div>
+</div>
+
+<div id="data-form" style="display:none">
 		系所：<input id="input-dept"><br>
 		學號：<input id="input-id"><br>
 		狀態：<select id="input-id-status">
@@ -109,12 +200,16 @@
 		<input id="input-birthday-year" size="3" maxlength="3">年
 		<input id="input-birthday-month" size="2" maxlength="2">月
 		<input id="input-birthday-day" size="2" maxlength="2">日<br>
-		照片網址：<input id="input-photourl" size="60">
-		<button onclick="create()" class="go-button">Create</button><br>
+
+		<button onclick="create()" class="go-button">Create</button>
+</div>
 	</div>
 
    <div id="canvas-container"></div>
 
+   <div id="post2fb" style="display:none">
+     <button onclick="PostImageToFacebook(window.authToken)" class="post-button">分享到FB</button>
+   </div>
 	<div id="id-outline" style="visibility: hidden;">
 
 		<img src="default_female.jpg" id="owner-photo">
