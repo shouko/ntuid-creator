@@ -14,13 +14,22 @@
   Student: b02705020 虞翔皓
   -->
 <head>
-
+<?php
+$og_url = 'https://ntu.shouko.tw/id-creator/';
+$og_img = 'og.png';
+if(isset($_GET['u'])){
+  $og_img = $_GET['u'];
+  $og_img = preg_replace("/[^a-zA-Z0-9]+/", "", $og_img);
+  $or_url .= "?u=".$og_img;
+  $og_img = "http://i.imgur.com/".$og_img.".png";
+}
+?>
   <title>NTU ID Creator</title>
   <meta charset="UTF-8">
   <meta property="og:title" content="懷舊版 NTU 學生證產生器" />
   <meta property="og:type" content="article" />
-  <meta property="og:image" content="og.png" />
-  <meta property="og:url" content="https://ntu.shouko.tw/id-creator/" />
+  <meta property="og:image" content="<?= $og_img ?>" />
+  <meta property="og:url" content="<?= $og_url ?>" />
   <meta property="og:description" content="懷舊版 NTU 學生證產生器" />
   <meta property="fb:app_id" content="516567928454960" />
 
