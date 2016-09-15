@@ -17,63 +17,19 @@
 
 	<title>NTU ID Creator</title>
 	<meta charset="UTF-8">
+	<meta property="og:title" content="懷舊版 NTU 學生證產生器" />
+	<meta property="og:type" content="article" />
+	<meta property="og:image" content="og.png" />
+	<meta property="og:url" content="https://ntu.shouko.tw/id-creator/" />
+	<meta property="og:description" content="懷舊版 NTU 學生證產生器" />
+	<meta property="fb:app_id" content="516567928454960" />
+
 	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
   <script src="./html2canvas.js"></script>
   <script src="//code.jquery.com/jquery-1.9.1.js"></script>
   <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
   <script type="text/javascript">
-
-function postToWall() {  
-    FB.login(function(response) {
-      if (response.authResponse) {
-          doPostToWall(response.authResponse.accessToken);
-      } else {
-        alert('請記得允許發佈的權限喔><');
-      }
-    }, {scope: 'publish_actions'});
-    return false;
-}
-
-
-
-
-// Post a BASE64 Encoded PNG Image to facebook
-function doPostToWall(authToken) {
-var imageData = imgToPost;
-try {
-    blob = dataURItoBlob(imageData);
-} catch (e) {
-    console.log(e);
-}
-var fd = new FormData();
-fd.append("access_token", authToken);
-fd.append("source", blob);
-fd.append("message", "這是我的NTU趣味學生證喔 ^.<\n\nhttp://ntu.shouko.tw/id-creator");
-try {
-    $.ajax({
-        url: "https://graph.facebook.com/me/photos?access_token=" + authToken,
-        type: "POST",
-        data: fd,
-        processData: false,
-        contentType: false,
-        cache: false,
-        success: function (data) {
-            console.log("success " + data);
-            alert('發佈成功!');
-        },
-        error: function (shr, status, data) {
-            console.log("error " + data + " Status " + shr.status);
-        },
-        complete: function () {
-            console.log("Posted to facebook");
-        }
-    });
-
-} catch (e) {
-    console.log(e);
-}
-}
 
 // Convert a data URI to blob
 function dataURItoBlob(dataURI) {
@@ -143,8 +99,8 @@ function formInit() {
         });
       });
 
-  </script>
-	<script type="text/javascript">
+  var imgToPost = "";
+
 	var status_base=new Array(10);
 	status_base[0]="新發";
 	status_base[1]="補發 1";
@@ -163,7 +119,45 @@ function formInit() {
     });
   });
 
+
+function uploadAndShare(){
+	$('#loading').css('visibility', '');
+
+	var img = imgToPost.split(',')[1];
+
+	$.ajax({
+	    url: 'https://api.imgur.com/3/image',
+	    type: 'post',
+	    headers: {
+	        Authorization: 'Client-ID 72c62382d2a73f2'
+	    },
+	    data: {
+	        image: img
+	    },
+	    dataType: 'json',
+	    success: function(response) {
+	        if(response.success) {
+						$('#loading').css('visibility', '');
+						console.log(response.data.link);
+						var imglink = response.data.link;
+						imglink = imglink.split('.com/');
+						imglink = imglink[1].split('.png');
+						imglink = imglink[0];
+						$("#iuLink").css('display',"");
+						$("#iuLink").val(response.data.link);
+
+						// share to facebook
+						window.open(
+						'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent('https://ntu.shouko.tw/id-creator/?u='+imglink),
+						'facebook-share-dialog',
+						'width=626,height=436');
+	        }
+	    }
+	});
+}
+
 	function create(){
+		$('#loading').css('visibility', '');
 		$("#result-dept").html($("#input-dept").val());
 		$("#result-id").html($("#input-id").val());
 		$("#result-id-status").html(status_base[$("#input-id-status").val()]);
@@ -171,15 +165,16 @@ function formInit() {
 		$("#result-birthday").html($("#input-birthday-year").val()+"年"+$("#input-birthday-month").val()+"月"+$("#input-birthday-day").val()+"日");
 		$("#owner-photo").attr('src', $("#input-photourl").val());
 		$("#id-outline").css('visibility', "visible");
-        html2canvas($("#id-outline"), {
-         onrendered: function(canvas) {
-        imgToPost = canvas.toDataURL('image/png');
-          $("#canvas-container").html('<img id="finalId" src=""><br><h4>發佈功能目前fb審核中，請先另存圖片再上傳 ><</h4>');
-          $("#finalId").attr('src',imgToPost);
-       $("#id-outline").css('visibility', "hidden");
-       $("#post2fb").css('display',"");
-        }
-       });
+	  html2canvas($("#id-outline"), {
+	   	onrendered: function(canvas) {
+		  	imgToPost = canvas.toDataURL('image/png');
+		    $("#canvas-container").html('<img id="finalId" src="">');
+		    $("#finalId").attr('src',imgToPost);
+		 		$("#id-outline").css('visibility', "hidden");
+				$('#loading').css('visibility', 'hidden');
+		 		$("#post2fb").css('display',"");
+			}
+	 	});
 	}
 	</script>
 </head>
@@ -219,8 +214,10 @@ function formInit() {
 
    <div id="canvas-container"></div>
 
+	 <div id="loading" style="visibility:hidden"><img src="loading.gif"></div>
+	 <div><input id="iuLink" style="display:none" /></div>
    <div id="post2fb" style="display:none">
-     <button onclick="postToWall()" class="post-button">分享到FB</button>
+     <button onclick="uploadAndShare()" class="post-button">上傳並分享到 Facebook</button>
    </div>
 	<div id="id-outline" style="visibility: hidden;">
 
