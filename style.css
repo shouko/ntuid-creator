@@ -106,3 +106,8 @@ canvas {
 #og-display-container {
 	text-align:center
 }
+
+.facebook-container, .fb-comments {
+	text-align: center;
+	margin: 0 auto;
+}

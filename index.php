@@ -33,7 +33,7 @@ if(isset($_GET['u'])){
   <meta property="og:description" content="懷舊版 NTU 學生證產生器" />
   <meta property="fb:app_id" content="516567928454960" />
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?201609151605">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
   <script src="./html2canvas.js"></script>
   <script src="//code.jquery.com/jquery-1.9.1.js"></script>
@@ -243,7 +243,9 @@ function uploadToIu(){
      <button onclick="shareToFb()" class="post-button" id="shareToFb" style="display:none">分享到 Facebook</button>
    </div>
 
+<div class="facebook-container">
 <div class="fb-comments" data-href="<?= $og_url ?>" data-numposts="5" data-colorscheme="light"></div>
+</div>
 
   <div id="id-outline" style="visibility: hidden;">
 
