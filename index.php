@@ -223,16 +223,19 @@ function uploadToIu(){
 
     <button onclick="create()" class="go-button">Create</button>
 </div>
-<?php
-if(isset($_GET['u'])) {
-  echo '<img src="'.$og_img.'">';
-}
-?>
-<div id="loading" style="visibility:hidden"><img src="loading.gif"></div>
-<div id="iuLinkContainer"><input id="iuLink" style="display:none" /></div>
   </div>
 
    <div id="canvas-container"></div>
+
+<div>
+	<?php
+	if(isset($_GET['u'])) {
+	  echo '<img src="'.$og_img.'" id="og_display">';
+	}
+	?>
+	<div id="loading" style="visibility:hidden"><img src="loading.gif"></div>
+	<div id="iuLinkContainer"><input id="iuLink" style="display:none" /></div>
+</div>
 
    <div id="post2fb" style="display:none">
      <button onclick="uploadToIu()" class="post-button">上傳</button>
