@@ -21,7 +21,7 @@ if(isset($_GET['u'])){
   $og_img = $_GET['u'];
   $og_img = preg_replace("/[^a-zA-Z0-9]+/", "", $og_img);
   $og_url .= "?u=".$og_img;
-  $og_img = "http://i.imgur.com/".$og_img.".png";
+  $og_img = "https://i.imgur.com/".$og_img.".png";
 }
 ?>
   <title>NTU ID Creator</title>
