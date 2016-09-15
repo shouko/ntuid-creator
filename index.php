@@ -154,7 +154,7 @@ function uploadToIu(){
             imglink = imglink[1].split('.png');
             imglink = imglink[0];
             $("#iuLink").css('display',"");
-            $("#iuLink").val(response.data.link);
+            $("#iuLink").val('https://ntu.shouko.tw/id-creator/?u='+imglink);
             $('#shareToFb').css('display', '');
           }
       }
@@ -235,7 +235,7 @@ function uploadToIu(){
 	}
 	?>
 	<div id="loading" style="visibility:hidden"><img src="loading.gif"></div>
-	<div id="iuLinkContainer"><input id="iuLink" style="display:none" /></div>
+	<div id="iuLinkContainer"><input id="iuLink" style="display:none" size="50" /></div>
 </div>
 
    <div id="post2fb" style="display:none">
