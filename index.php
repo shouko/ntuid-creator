@@ -242,6 +242,9 @@ function uploadToIu(){
      <button onclick="uploadToIu()" class="post-button">上傳</button>
      <button onclick="shareToFb()" class="post-button" id="shareToFb" style="display:none">分享到 Facebook</button>
    </div>
+
+<div class="fb-comments" data-href="<?= $og_url ?>" data-numposts="5" data-colorscheme="light"></div>
+
   <div id="id-outline" style="visibility: hidden;">
 
     <img src="default_female.jpg" id="owner-photo">
