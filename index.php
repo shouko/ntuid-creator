@@ -207,10 +207,10 @@ function uploadToIu(){
 				<option value="9">補發 9</option>
 			</select><br>
 		姓名：<input id="input-name"><br>
-		生日：民國
-		<input id="input-birthday-year" size="3" maxlength="3" value="17">年
-		<input id="input-birthday-month" size="2" maxlength="2" value="3">月
-		<input id="input-birthday-day" size="2" maxlength="2" value="17">日<br>
+		生日：
+		<input id="input-birthday-year" size="7" maxlength="" value="民國87">年
+		<input id="input-birthday-month" size="2" maxlength="2" value="8">月
+		<input id="input-birthday-day" size="2" maxlength="2" value="7">日<br>
 
 		<button onclick="create()" class="go-button">Create</button>
 </div>
@@ -231,7 +231,7 @@ function uploadToIu(){
 			<li>系所：<span id="result-dept"></span></li><br>
 			<li>學號：<span id="result-id"></span> <span id="result-id-status"></span></li>
 			<li>姓名：<span id="result-name"></span></li>
-			<li>生日：民國<span id="result-birthday"></span></li>
+			<li>生日：<span id="result-birthday"></span></li>
 		</ul>
     <span id="watermark">Created using http://ntu.shouko.tw/id-creator</span>
 	</div>
