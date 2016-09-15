@@ -147,7 +147,7 @@ function uploadToIu(){
       dataType: 'json',
       success: function(response) {
           if(response.success) {
-            $('#loading').css('visibility', '');
+            $('#loading').css('visibility', 'hidden');
             console.log(response.data.link);
             imglink = response.data.link;
             imglink = imglink.split('.com/');
