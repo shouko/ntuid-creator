@@ -20,7 +20,7 @@ $og_img = 'og.png';
 if(isset($_GET['u'])){
   $og_img = $_GET['u'];
   $og_img = preg_replace("/[^a-zA-Z0-9]+/", "", $og_img);
-  $or_url .= "?u=".$og_img;
+  $og_url .= "?u=".$og_img;
   $og_img = "http://i.imgur.com/".$og_img.".png";
 }
 ?>
@@ -194,7 +194,7 @@ function uploadToIu(){
 <body>
   <div class="creator-form">
     <h1>NTU ID Creator</h1>
-    <h4>歡迎使用趣味台大學生證產生器！登入FB後請輸入以下欄位並按下Create即可產生。本工具僅供紀念使用，並無任何效力，任意使用本人恕不負責噢！</h4>
+    <h4>歡迎使用懷舊版台大學生證產生器！登入FB後請輸入欄位並按下Create即可產生。本工具僅供紀念使用 QQ</h4>
     <div id="fblogin"><fb:login-button data-size="xlarge" scope="public_profile" onlogin="checkLoginState();">
 </fb:login-button>  <div id="status">
 </div>
@@ -223,12 +223,17 @@ function uploadToIu(){
 
     <button onclick="create()" class="go-button">Create</button>
 </div>
+<?php
+if(isset($_GET['u'])) {
+  echo '<img src="'.$og_img.'">';
+}
+?>
+<div id="loading" style="visibility:hidden"><img src="loading.gif"></div>
+<div id="iuLinkContainer"><input id="iuLink" style="display:none" /></div>
   </div>
 
    <div id="canvas-container"></div>
 
-   <div id="loading" style="visibility:hidden"><img src="loading.gif"></div>
-   <div id="iuLinkContainer"><input id="iuLink" style="display:none" /></div>
    <div id="post2fb" style="display:none">
      <button onclick="uploadToIu()" class="post-button">上傳</button>
      <button onclick="shareToFb()" class="post-button" id="shareToFb" style="display:none">分享到 Facebook</button>
