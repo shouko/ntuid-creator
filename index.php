@@ -229,11 +229,7 @@ function uploadToIu(){
    <div id="canvas-container"></div>
 
 <div id="og-display-container">
-	<?php
-	if(isset($_GET['u'])) {
-	  echo '<img src="'.$og_img.'" id="og_display">';
-	}
-	?>
+<img src="<?= $og_img ?>" id="og_display">
 	<div id="loading" style="visibility:hidden"><img src="loading.gif"></div>
 	<div id="iuLinkContainer"><input id="iuLink" style="display:none" size="50" /></div>
 </div>
