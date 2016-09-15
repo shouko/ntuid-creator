@@ -169,7 +169,8 @@ function uploadToIu(){
   }
 
   function create(){
-    $('#loading').css('visibility', '');
+		$('#loading').css('visibility', '');
+		$('#og_display').css('display', 'none');
     $("#result-dept").html($("#input-dept").val());
     $("#result-id").html($("#input-id").val());
     $("#result-id-status").html(status_base[$("#input-id-status").val()]);
@@ -227,7 +228,7 @@ function uploadToIu(){
 
    <div id="canvas-container"></div>
 
-<div>
+<div id="og-display-container">
 	<?php
 	if(isset($_GET['u'])) {
 	  echo '<img src="'.$og_img.'" id="og_display">';

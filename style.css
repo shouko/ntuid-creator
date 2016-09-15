@@ -103,6 +103,6 @@ canvas {
     display: block;
 }
 
-#loading, #iuLinkContainer {
-	text-align: center;
+#og-display-container {
+	text-align:center
 }
