@@ -100,6 +100,7 @@ function formInit() {
       });
 
   var imgToPost = "";
+	var imglink = "";
 
 	var status_base=new Array(10);
 	status_base[0]="新發";
@@ -120,7 +121,7 @@ function formInit() {
   });
 
 
-function uploadAndShare(){
+function uploadToIu(){
 	$('#loading').css('visibility', '');
 
 	var img = imgToPost.split(',')[1];
@@ -139,22 +140,24 @@ function uploadAndShare(){
 	        if(response.success) {
 						$('#loading').css('visibility', '');
 						console.log(response.data.link);
-						var imglink = response.data.link;
+						imglink = response.data.link;
 						imglink = imglink.split('.com/');
 						imglink = imglink[1].split('.png');
 						imglink = imglink[0];
 						$("#iuLink").css('display',"");
 						$("#iuLink").val(response.data.link);
-
-						// share to facebook
-						window.open(
-						'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent('https://ntu.shouko.tw/id-creator/?u='+imglink),
-						'facebook-share-dialog',
-						'width=626,height=436');
-	        }
+						$('#shareToFb').css('display', '');
+					}
 	    }
 	});
 }
+
+	function shareToFb() {
+		window.open(
+		'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent('https://ntu.shouko.tw/id-creator/?u='+imglink),
+		'facebook-share-dialog',
+		'width=626,height=436');
+	}
 
 	function create(){
 		$('#loading').css('visibility', '');
@@ -172,7 +175,8 @@ function uploadAndShare(){
 		    $("#finalId").attr('src',imgToPost);
 		 		$("#id-outline").css('visibility', "hidden");
 				$('#loading').css('visibility', 'hidden');
-		 		$("#post2fb").css('display',"");
+				$("#post2fb").css('display',"");
+				$("#shareToFb").css('display',"none");
 			}
 	 	});
 	}
@@ -215,9 +219,10 @@ function uploadAndShare(){
    <div id="canvas-container"></div>
 
 	 <div id="loading" style="visibility:hidden"><img src="loading.gif"></div>
-	 <div><input id="iuLink" style="display:none" /></div>
+	 <div id="iuLinkContainer"><input id="iuLink" style="display:none" /></div>
    <div id="post2fb" style="display:none">
-     <button onclick="uploadAndShare()" class="post-button">上傳並分享到 Facebook</button>
+		 <button onclick="uploadToIu()" class="post-button">上傳</button>
+		 <button onclick="shareToFb()" class="post-button" id="shareToFb" style="display:none">分享到 Facebook</button>
    </div>
 	<div id="id-outline" style="visibility: hidden;">
 

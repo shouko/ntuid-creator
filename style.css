@@ -102,3 +102,7 @@ canvas {
     margin-right: auto;
     display: block;
 }
+
+#loading, #iuLinkContainer {
+	text-align: center;
+}
